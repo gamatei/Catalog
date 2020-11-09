@@ -1,0 +1,822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CatalogProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Absenta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDElev" Type="int" Nullable="false" />
+          <Property Name="IDMaterieClasa" Type="int" Nullable="false" />
+          <Property Name="DataAbsenta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clasa">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IDDiriginte" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Elev">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUtilizator" Type="int" Nullable="false" />
+          <Property Name="IDClasa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Functie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descriere" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Materie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterieClasa">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDClasa" Type="int" Nullable="false" />
+          <Property Name="IDMaterie" Type="int" Nullable="false" />
+          <Property Name="OreSaptamanal" Type="int" />
+          <Property Name="IDProfesor" Type="int" />
+        </EntityType>
+        <EntityType Name="Nota">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDElev" Type="int" Nullable="false" />
+          <Property Name="IDMaterieClasa" Type="int" Nullable="false" />
+          <Property Name="Nota" Type="int" />
+          <Property Name="DataNota" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUtilizator" Type="int" Nullable="false" />
+          <Property Name="Detalii" Type="varchar" MaxLength="50" />
+          <Property Name="IDMaterie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilizator">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Parola" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IDFunctie" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenume" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ContActiv" Type="bit" Nullable="false" />
+          <Property Name="IDElev" Type="int" />
+        </EntityType>
+        <EntityType Name="UtilizatorAsteptare">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUtilizator" Type="int" Nullable="false" />
+          <Property Name="Hash" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Absenta__IDElev__37A5467C">
+          <End Role="Elev" Type="Self.Elev" Multiplicity="1" />
+          <End Role="Absenta" Type="Self.Absenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elev">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absenta">
+              <PropertyRef Name="IDElev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Absenta__IDMater__4222D4EF">
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="1" />
+          <End Role="Absenta" Type="Self.Absenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterieClasa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absenta">
+              <PropertyRef Name="IDMaterieClasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clasa__IDDirigin__31EC6D26">
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="1" />
+          <End Role="Clasa" Type="Self.Clasa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clasa">
+              <PropertyRef Name="IDDiriginte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Elev__IDClasa__403A8C7D">
+          <End Role="Clasa" Type="Self.Clasa" Multiplicity="1" />
+          <End Role="Elev" Type="Self.Elev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clasa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Elev">
+              <PropertyRef Name="IDClasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Elev__IDUtilizat__2F10007B">
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="1" />
+          <End Role="Elev" Type="Self.Elev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizator">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Elev">
+              <PropertyRef Name="IDUtilizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MaterieCl__IDCla__3D5E1FD2">
+          <End Role="Clasa" Type="Self.Clasa" Multiplicity="1" />
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clasa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterieClasa">
+              <PropertyRef Name="IDClasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MaterieCl__IDMat__3C69FB99">
+          <End Role="Materie" Type="Self.Materie" Multiplicity="1" />
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterieClasa">
+              <PropertyRef Name="IDMaterie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MaterieCl__IDPro__3E52440B">
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="0..1" />
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterieClasa">
+              <PropertyRef Name="IDProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nota__IDElev__34C8D9D1">
+          <End Role="Elev" Type="Self.Elev" Multiplicity="1" />
+          <End Role="Nota" Type="Self.Nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elev">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nota">
+              <PropertyRef Name="IDElev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nota__IDMaterieC__412EB0B6">
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="1" />
+          <End Role="Nota" Type="Self.Nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterieClasa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nota">
+              <PropertyRef Name="IDMaterieClasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profesor__IDUtil__2C3393D0">
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="1" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizator">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Profesor">
+              <PropertyRef Name="IDUtilizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Utilizato__IDEle__3F466844">
+          <End Role="Elev" Type="Self.Elev" Multiplicity="0..1" />
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elev">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Utilizator">
+              <PropertyRef Name="IDElev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Utilizato__IDFun__267ABA7A">
+          <End Role="Functie" Type="Self.Functie" Multiplicity="1" />
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Functie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Utilizator">
+              <PropertyRef Name="IDFunctie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Utilizato__IDUti__29572725">
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="1" />
+          <End Role="UtilizatorAsteptare" Type="Self.UtilizatorAsteptare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizator">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UtilizatorAsteptare">
+              <PropertyRef Name="IDUtilizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CatalogProjectModelStoreContainer">
+          <EntitySet Name="Absenta" EntityType="Self.Absenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clasa" EntityType="Self.Clasa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Elev" EntityType="Self.Elev" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Functie" EntityType="Self.Functie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materie" EntityType="Self.Materie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterieClasa" EntityType="Self.MaterieClasa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nota" EntityType="Self.Nota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesor" EntityType="Self.Profesor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilizator" EntityType="Self.Utilizator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UtilizatorAsteptare" EntityType="Self.UtilizatorAsteptare" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Absenta__IDElev__37A5467C" Association="Self.FK__Absenta__IDElev__37A5467C">
+            <End Role="Elev" EntitySet="Elev" />
+            <End Role="Absenta" EntitySet="Absenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Absenta__IDMater__4222D4EF" Association="Self.FK__Absenta__IDMater__4222D4EF">
+            <End Role="MaterieClasa" EntitySet="MaterieClasa" />
+            <End Role="Absenta" EntitySet="Absenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clasa__IDDirigin__31EC6D26" Association="Self.FK__Clasa__IDDirigin__31EC6D26">
+            <End Role="Profesor" EntitySet="Profesor" />
+            <End Role="Clasa" EntitySet="Clasa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Elev__IDClasa__403A8C7D" Association="Self.FK__Elev__IDClasa__403A8C7D">
+            <End Role="Clasa" EntitySet="Clasa" />
+            <End Role="Elev" EntitySet="Elev" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Elev__IDUtilizat__2F10007B" Association="Self.FK__Elev__IDUtilizat__2F10007B">
+            <End Role="Utilizator" EntitySet="Utilizator" />
+            <End Role="Elev" EntitySet="Elev" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MaterieCl__IDCla__3D5E1FD2" Association="Self.FK__MaterieCl__IDCla__3D5E1FD2">
+            <End Role="Clasa" EntitySet="Clasa" />
+            <End Role="MaterieClasa" EntitySet="MaterieClasa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MaterieCl__IDMat__3C69FB99" Association="Self.FK__MaterieCl__IDMat__3C69FB99">
+            <End Role="Materie" EntitySet="Materie" />
+            <End Role="MaterieClasa" EntitySet="MaterieClasa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MaterieCl__IDPro__3E52440B" Association="Self.FK__MaterieCl__IDPro__3E52440B">
+            <End Role="Profesor" EntitySet="Profesor" />
+            <End Role="MaterieClasa" EntitySet="MaterieClasa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nota__IDElev__34C8D9D1" Association="Self.FK__Nota__IDElev__34C8D9D1">
+            <End Role="Elev" EntitySet="Elev" />
+            <End Role="Nota" EntitySet="Nota" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nota__IDMaterieC__412EB0B6" Association="Self.FK__Nota__IDMaterieC__412EB0B6">
+            <End Role="MaterieClasa" EntitySet="MaterieClasa" />
+            <End Role="Nota" EntitySet="Nota" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profesor__IDUtil__2C3393D0" Association="Self.FK__Profesor__IDUtil__2C3393D0">
+            <End Role="Utilizator" EntitySet="Utilizator" />
+            <End Role="Profesor" EntitySet="Profesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Utilizato__IDEle__3F466844" Association="Self.FK__Utilizato__IDEle__3F466844">
+            <End Role="Elev" EntitySet="Elev" />
+            <End Role="Utilizator" EntitySet="Utilizator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Utilizato__IDFun__267ABA7A" Association="Self.FK__Utilizato__IDFun__267ABA7A">
+            <End Role="Functie" EntitySet="Functie" />
+            <End Role="Utilizator" EntitySet="Utilizator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Utilizato__IDUti__29572725" Association="Self.FK__Utilizato__IDUti__29572725">
+            <End Role="Utilizator" EntitySet="Utilizator" />
+            <End Role="UtilizatorAsteptare" EntitySet="UtilizatorAsteptare" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CatalogProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Absenta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDElev" Type="Int32" Nullable="false" />
+          <Property Name="IDMaterieClasa" Type="Int32" Nullable="false" />
+          <Property Name="DataAbsenta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Elev" Relationship="Self.FK__Absenta__IDElev__37A5467C" FromRole="Absenta" ToRole="Elev" />
+          <NavigationProperty Name="MaterieClasa" Relationship="Self.FK__Absenta__IDMater__4222D4EF" FromRole="Absenta" ToRole="MaterieClasa" />
+        </EntityType>
+        <EntityType Name="Clasa">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDDiriginte" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Profesor" Relationship="Self.FK__Clasa__IDDirigin__31EC6D26" FromRole="Clasa" ToRole="Profesor" />
+          <NavigationProperty Name="Elevs" Relationship="Self.FK__Elev__IDClasa__403A8C7D" FromRole="Clasa" ToRole="Elev" />
+          <NavigationProperty Name="MaterieClasas" Relationship="Self.FK__MaterieCl__IDCla__3D5E1FD2" FromRole="Clasa" ToRole="MaterieClasa" />
+        </EntityType>
+        <EntityType Name="Elev">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUtilizator" Type="Int32" Nullable="false" />
+          <Property Name="IDClasa" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Absentas" Relationship="Self.FK__Absenta__IDElev__37A5467C" FromRole="Elev" ToRole="Absenta" />
+          <NavigationProperty Name="Clasa" Relationship="Self.FK__Elev__IDClasa__403A8C7D" FromRole="Elev" ToRole="Clasa" />
+          <NavigationProperty Name="Utilizator" Relationship="Self.FK__Elev__IDUtilizat__2F10007B" FromRole="Elev" ToRole="Utilizator" />
+          <NavigationProperty Name="Notas" Relationship="Self.FK__Nota__IDElev__34C8D9D1" FromRole="Elev" ToRole="Nota" />
+          <NavigationProperty Name="Utilizators" Relationship="Self.FK__Utilizato__IDEle__3F466844" FromRole="Elev" ToRole="Utilizator" />
+        </EntityType>
+        <EntityType Name="Functie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descriere" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Utilizators" Relationship="Self.FK__Utilizato__IDFun__267ABA7A" FromRole="Functie" ToRole="Utilizator" />
+        </EntityType>
+        <EntityType Name="Materie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MaterieClasas" Relationship="Self.FK__MaterieCl__IDMat__3C69FB99" FromRole="Materie" ToRole="MaterieClasa" />
+        </EntityType>
+        <EntityType Name="MaterieClasa">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDClasa" Type="Int32" Nullable="false" />
+          <Property Name="IDMaterie" Type="Int32" Nullable="false" />
+          <Property Name="OreSaptamanal" Type="Int32" />
+          <Property Name="IDProfesor" Type="Int32" />
+          <NavigationProperty Name="Absentas" Relationship="Self.FK__Absenta__IDMater__4222D4EF" FromRole="MaterieClasa" ToRole="Absenta" />
+          <NavigationProperty Name="Clasa" Relationship="Self.FK__MaterieCl__IDCla__3D5E1FD2" FromRole="MaterieClasa" ToRole="Clasa" />
+          <NavigationProperty Name="Materie" Relationship="Self.FK__MaterieCl__IDMat__3C69FB99" FromRole="MaterieClasa" ToRole="Materie" />
+          <NavigationProperty Name="Profesor" Relationship="Self.FK__MaterieCl__IDPro__3E52440B" FromRole="MaterieClasa" ToRole="Profesor" />
+          <NavigationProperty Name="Notas" Relationship="Self.FK__Nota__IDMaterieC__412EB0B6" FromRole="MaterieClasa" ToRole="Nota" />
+        </EntityType>
+        <EntityType Name="Nota">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDElev" Type="Int32" Nullable="false" />
+          <Property Name="IDMaterieClasa" Type="Int32" Nullable="false" />
+          <Property Name="Nota1" Type="Int32" />
+          <Property Name="DataNota" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Elev" Relationship="Self.FK__Nota__IDElev__34C8D9D1" FromRole="Nota" ToRole="Elev" />
+          <NavigationProperty Name="MaterieClasa" Relationship="Self.FK__Nota__IDMaterieC__412EB0B6" FromRole="Nota" ToRole="MaterieClasa" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUtilizator" Type="Int32" Nullable="false" />
+          <Property Name="Detalii" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDMaterie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clasas" Relationship="Self.FK__Clasa__IDDirigin__31EC6D26" FromRole="Profesor" ToRole="Clasa" />
+          <NavigationProperty Name="MaterieClasas" Relationship="Self.FK__MaterieCl__IDPro__3E52440B" FromRole="Profesor" ToRole="MaterieClasa" />
+          <NavigationProperty Name="Utilizator" Relationship="Self.FK__Profesor__IDUtil__2C3393D0" FromRole="Profesor" ToRole="Utilizator" />
+        </EntityType>
+        <EntityType Name="Utilizator">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Parola" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDFunctie" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenume" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nume" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContActiv" Type="Boolean" Nullable="false" />
+          <Property Name="IDElev" Type="Int32" />
+          <NavigationProperty Name="Elevs" Relationship="Self.FK__Elev__IDUtilizat__2F10007B" FromRole="Utilizator" ToRole="Elev" />
+          <NavigationProperty Name="Elev" Relationship="Self.FK__Utilizato__IDEle__3F466844" FromRole="Utilizator" ToRole="Elev" />
+          <NavigationProperty Name="Functie" Relationship="Self.FK__Utilizato__IDFun__267ABA7A" FromRole="Utilizator" ToRole="Functie" />
+          <NavigationProperty Name="Profesors" Relationship="Self.FK__Profesor__IDUtil__2C3393D0" FromRole="Utilizator" ToRole="Profesor" />
+          <NavigationProperty Name="UtilizatorAsteptares" Relationship="Self.FK__Utilizato__IDUti__29572725" FromRole="Utilizator" ToRole="UtilizatorAsteptare" />
+        </EntityType>
+        <EntityType Name="UtilizatorAsteptare">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUtilizator" Type="Int32" Nullable="false" />
+          <Property Name="Hash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Utilizator" Relationship="Self.FK__Utilizato__IDUti__29572725" FromRole="UtilizatorAsteptare" ToRole="Utilizator" />
+        </EntityType>
+        <Association Name="FK__Absenta__IDElev__37A5467C">
+          <End Role="Elev" Type="Self.Elev" Multiplicity="1" />
+          <End Role="Absenta" Type="Self.Absenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elev">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absenta">
+              <PropertyRef Name="IDElev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Absenta__IDMater__4222D4EF">
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="1" />
+          <End Role="Absenta" Type="Self.Absenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterieClasa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absenta">
+              <PropertyRef Name="IDMaterieClasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clasa__IDDirigin__31EC6D26">
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="1" />
+          <End Role="Clasa" Type="Self.Clasa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clasa">
+              <PropertyRef Name="IDDiriginte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Elev__IDClasa__403A8C7D">
+          <End Role="Clasa" Type="Self.Clasa" Multiplicity="1" />
+          <End Role="Elev" Type="Self.Elev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clasa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Elev">
+              <PropertyRef Name="IDClasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MaterieCl__IDCla__3D5E1FD2">
+          <End Role="Clasa" Type="Self.Clasa" Multiplicity="1" />
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clasa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterieClasa">
+              <PropertyRef Name="IDClasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Elev__IDUtilizat__2F10007B">
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="1" />
+          <End Role="Elev" Type="Self.Elev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizator">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Elev">
+              <PropertyRef Name="IDUtilizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nota__IDElev__34C8D9D1">
+          <End Role="Elev" Type="Self.Elev" Multiplicity="1" />
+          <End Role="Nota" Type="Self.Nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elev">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nota">
+              <PropertyRef Name="IDElev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Utilizato__IDEle__3F466844">
+          <End Role="Elev" Type="Self.Elev" Multiplicity="0..1" />
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elev">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Utilizator">
+              <PropertyRef Name="IDElev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Utilizato__IDFun__267ABA7A">
+          <End Role="Functie" Type="Self.Functie" Multiplicity="1" />
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Functie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Utilizator">
+              <PropertyRef Name="IDFunctie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MaterieCl__IDMat__3C69FB99">
+          <End Role="Materie" Type="Self.Materie" Multiplicity="1" />
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterieClasa">
+              <PropertyRef Name="IDMaterie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MaterieCl__IDPro__3E52440B">
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="0..1" />
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterieClasa">
+              <PropertyRef Name="IDProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nota__IDMaterieC__412EB0B6">
+          <End Role="MaterieClasa" Type="Self.MaterieClasa" Multiplicity="1" />
+          <End Role="Nota" Type="Self.Nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterieClasa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nota">
+              <PropertyRef Name="IDMaterieClasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profesor__IDUtil__2C3393D0">
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="1" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizator">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Profesor">
+              <PropertyRef Name="IDUtilizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Utilizato__IDUti__29572725">
+          <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="1" />
+          <End Role="UtilizatorAsteptare" Type="Self.UtilizatorAsteptare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizator">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UtilizatorAsteptare">
+              <PropertyRef Name="IDUtilizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CatalogProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Absentas" EntityType="Self.Absenta" />
+          <EntitySet Name="Clasas" EntityType="Self.Clasa" />
+          <EntitySet Name="Elevs" EntityType="Self.Elev" />
+          <EntitySet Name="Functies" EntityType="Self.Functie" />
+          <EntitySet Name="Materies" EntityType="Self.Materie" />
+          <EntitySet Name="MaterieClasas" EntityType="Self.MaterieClasa" />
+          <EntitySet Name="Notas" EntityType="Self.Nota" />
+          <EntitySet Name="Profesors" EntityType="Self.Profesor" />
+          <EntitySet Name="Utilizators" EntityType="Self.Utilizator" />
+          <EntitySet Name="UtilizatorAsteptares" EntityType="Self.UtilizatorAsteptare" />
+          <AssociationSet Name="FK__Absenta__IDElev__37A5467C" Association="Self.FK__Absenta__IDElev__37A5467C">
+            <End Role="Elev" EntitySet="Elevs" />
+            <End Role="Absenta" EntitySet="Absentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Absenta__IDMater__4222D4EF" Association="Self.FK__Absenta__IDMater__4222D4EF">
+            <End Role="MaterieClasa" EntitySet="MaterieClasas" />
+            <End Role="Absenta" EntitySet="Absentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clasa__IDDirigin__31EC6D26" Association="Self.FK__Clasa__IDDirigin__31EC6D26">
+            <End Role="Profesor" EntitySet="Profesors" />
+            <End Role="Clasa" EntitySet="Clasas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Elev__IDClasa__403A8C7D" Association="Self.FK__Elev__IDClasa__403A8C7D">
+            <End Role="Clasa" EntitySet="Clasas" />
+            <End Role="Elev" EntitySet="Elevs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MaterieCl__IDCla__3D5E1FD2" Association="Self.FK__MaterieCl__IDCla__3D5E1FD2">
+            <End Role="Clasa" EntitySet="Clasas" />
+            <End Role="MaterieClasa" EntitySet="MaterieClasas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Elev__IDUtilizat__2F10007B" Association="Self.FK__Elev__IDUtilizat__2F10007B">
+            <End Role="Utilizator" EntitySet="Utilizators" />
+            <End Role="Elev" EntitySet="Elevs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nota__IDElev__34C8D9D1" Association="Self.FK__Nota__IDElev__34C8D9D1">
+            <End Role="Elev" EntitySet="Elevs" />
+            <End Role="Nota" EntitySet="Notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Utilizato__IDEle__3F466844" Association="Self.FK__Utilizato__IDEle__3F466844">
+            <End Role="Elev" EntitySet="Elevs" />
+            <End Role="Utilizator" EntitySet="Utilizators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Utilizato__IDFun__267ABA7A" Association="Self.FK__Utilizato__IDFun__267ABA7A">
+            <End Role="Functie" EntitySet="Functies" />
+            <End Role="Utilizator" EntitySet="Utilizators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MaterieCl__IDMat__3C69FB99" Association="Self.FK__MaterieCl__IDMat__3C69FB99">
+            <End Role="Materie" EntitySet="Materies" />
+            <End Role="MaterieClasa" EntitySet="MaterieClasas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MaterieCl__IDPro__3E52440B" Association="Self.FK__MaterieCl__IDPro__3E52440B">
+            <End Role="Profesor" EntitySet="Profesors" />
+            <End Role="MaterieClasa" EntitySet="MaterieClasas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nota__IDMaterieC__412EB0B6" Association="Self.FK__Nota__IDMaterieC__412EB0B6">
+            <End Role="MaterieClasa" EntitySet="MaterieClasas" />
+            <End Role="Nota" EntitySet="Notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profesor__IDUtil__2C3393D0" Association="Self.FK__Profesor__IDUtil__2C3393D0">
+            <End Role="Utilizator" EntitySet="Utilizators" />
+            <End Role="Profesor" EntitySet="Profesors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Utilizato__IDUti__29572725" Association="Self.FK__Utilizato__IDUti__29572725">
+            <End Role="Utilizator" EntitySet="Utilizators" />
+            <End Role="UtilizatorAsteptare" EntitySet="UtilizatorAsteptares" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CatalogProjectModelStoreContainer" CdmEntityContainer="CatalogProjectEntities">
+          <EntitySetMapping Name="Absentas">
+            <EntityTypeMapping TypeName="CatalogProjectModel.Absenta">
+              <MappingFragment StoreEntitySet="Absenta">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDElev" ColumnName="IDElev" />
+                <ScalarProperty Name="IDMaterieClasa" ColumnName="IDMaterieClasa" />
+                <ScalarProperty Name="DataAbsenta" ColumnName="DataAbsenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clasas">
+            <EntityTypeMapping TypeName="CatalogProjectModel.Clasa">
+              <MappingFragment StoreEntitySet="Clasa">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="IDDiriginte" ColumnName="IDDiriginte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Elevs">
+            <EntityTypeMapping TypeName="CatalogProjectModel.Elev">
+              <MappingFragment StoreEntitySet="Elev">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUtilizator" ColumnName="IDUtilizator" />
+                <ScalarProperty Name="IDClasa" ColumnName="IDClasa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Functies">
+            <EntityTypeMapping TypeName="CatalogProjectModel.Functie">
+              <MappingFragment StoreEntitySet="Functie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materies">
+            <EntityTypeMapping TypeName="CatalogProjectModel.Materie">
+              <MappingFragment StoreEntitySet="Materie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterieClasas">
+            <EntityTypeMapping TypeName="CatalogProjectModel.MaterieClasa">
+              <MappingFragment StoreEntitySet="MaterieClasa">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDClasa" ColumnName="IDClasa" />
+                <ScalarProperty Name="IDMaterie" ColumnName="IDMaterie" />
+                <ScalarProperty Name="OreSaptamanal" ColumnName="OreSaptamanal" />
+                <ScalarProperty Name="IDProfesor" ColumnName="IDProfesor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notas">
+            <EntityTypeMapping TypeName="CatalogProjectModel.Nota">
+              <MappingFragment StoreEntitySet="Nota">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDElev" ColumnName="IDElev" />
+                <ScalarProperty Name="IDMaterieClasa" ColumnName="IDMaterieClasa" />
+                <ScalarProperty Name="Nota1" ColumnName="Nota" />
+                <ScalarProperty Name="DataNota" ColumnName="DataNota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesors">
+            <EntityTypeMapping TypeName="CatalogProjectModel.Profesor">
+              <MappingFragment StoreEntitySet="Profesor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUtilizator" ColumnName="IDUtilizator" />
+                <ScalarProperty Name="Detalii" ColumnName="Detalii" />
+                <ScalarProperty Name="IDMaterie" ColumnName="IDMaterie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizators">
+            <EntityTypeMapping TypeName="CatalogProjectModel.Utilizator">
+              <MappingFragment StoreEntitySet="Utilizator">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Parola" ColumnName="Parola" />
+                <ScalarProperty Name="IDFunctie" ColumnName="IDFunctie" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="ContActiv" ColumnName="ContActiv" />
+                <ScalarProperty Name="IDElev" ColumnName="IDElev" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UtilizatorAsteptares">
+            <EntityTypeMapping TypeName="CatalogProjectModel.UtilizatorAsteptare">
+              <MappingFragment StoreEntitySet="UtilizatorAsteptare">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUtilizator" ColumnName="IDUtilizator" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
