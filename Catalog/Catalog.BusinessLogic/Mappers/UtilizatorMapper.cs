@@ -38,5 +38,7 @@ namespace Catalog.BusinessLogic.Mappers
                 IDElev = utilizator.IDElev
             };
         }
+
+        //public static
     }
 }
