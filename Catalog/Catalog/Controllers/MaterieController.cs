@@ -1,4 +1,5 @@
-﻿using Catalog.Model;
+﻿using Catalog.BusinessLogic;
+using Catalog.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,40 +10,30 @@ namespace Catalog.Controllers
 {
     public class MaterieController : Controller
     {
-        // GET: Materie
+        [HttpGet]
         public ActionResult Index()
         {
-
-            return View();
+            var listaMaterii = new MaterieBusiness().GetMaterii();
+            return View(listaMaterii);
         }
 
-        // GET: Materie/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: Materie/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Materie/Create
+        
         [HttpPost]
-        public ActionResult Create(MaterieModel collection)
+        public ActionResult Create(MaterieModel materieModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-                // -> din controller trimiti modelul la business -=> transofrmi modelul in entitate -> trimiti entitadea din business in DAL -> salvezi in baza de date
-
+                new MaterieBusiness().Insert(materieModel);
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Materie/Edit/5

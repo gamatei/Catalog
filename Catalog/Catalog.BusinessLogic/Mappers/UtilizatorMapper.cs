@@ -8,7 +8,8 @@ namespace Catalog.BusinessLogic.Mappers
 {
     public static class UtilizatorMapper
     {
-        public static Utilizator ToEntity(this UtilizatorModel utilizatorModel) {           
+        public static Utilizator ToEntity(this UtilizatorModel utilizatorModel) 
+        {           
 
             return new Utilizator()
             {
@@ -24,7 +25,7 @@ namespace Catalog.BusinessLogic.Mappers
 
         public static UtilizatorModel ToModel(this Utilizator utilizator)
         {
-            var fuctie = FunctieHelper.Get(utilizator.IDFunctie);
+            var functie = FunctieHelper.Get(utilizator.IDFunctie);
 
             return new UtilizatorModel()
             {
@@ -32,7 +33,7 @@ namespace Catalog.BusinessLogic.Mappers
                 Username = utilizator.Username,
                 IDFunctie = utilizator.IDFunctie,
                 Email = utilizator.Email,
-                Functie = fuctie.Descriere,
+                Functie = functie.Descriere,
                 Prenume = utilizator.Prenume,
                 Nume = utilizator.Nume,
                 IDElev = utilizator.IDElev

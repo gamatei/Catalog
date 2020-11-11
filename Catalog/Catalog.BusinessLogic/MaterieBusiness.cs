@@ -7,7 +7,7 @@ namespace Catalog.BusinessLogic
 {
     public class MaterieBusiness
     {
-        public IEnumerable<MaterieModel> GetUsers()
+        public IEnumerable<MaterieModel> GetMaterii()
         {
             var retValue = new List<MaterieModel>();
             var entities = MaterieHelper.GetAll();
@@ -23,5 +23,6 @@ namespace Catalog.BusinessLogic
 
             return retValue;
         }
+
     }
 }
