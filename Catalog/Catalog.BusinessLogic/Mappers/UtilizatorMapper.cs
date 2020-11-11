@@ -39,6 +39,6 @@ namespace Catalog.BusinessLogic.Mappers
             };
         }
 
-        //public static
+        
     }
 }

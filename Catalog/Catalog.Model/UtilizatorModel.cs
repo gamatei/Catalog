@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Catalog.Model
 {
@@ -21,6 +22,8 @@ namespace Catalog.Model
         public string Nume { get; set; }
         [Display(Name = "Userul este parintele lui:")]
         public int? IDElev { get; set; }
+
+        public IEnumerable<FunctieModel> Functii;
     }
 
 }

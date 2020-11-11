@@ -1,6 +1,7 @@
 ﻿using Catalog.BusinessLogic.Mappers;
 using Catalog.BusinessLogic.Tools;
 using Catalog.DAL;
+using Catalog.Entities;
 using Catalog.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,25 +11,31 @@ namespace Catalog.BusinessLogic
 {
     public class UtilizatorBusiness
     {
+        public UtilizatorModel ValidateUser(string username, string parola) {
+            // user pe baza de parola
+            var user = UtilizatorHelper.GetByUsername(username);
+
+            if (user == null) {
+                return null;
+            }
+
+            var pswHash = Utilities.GetHash(parola);
+            if (user.Parola != pswHash) {
+                return null;
+            }
+
+            return user.ToModel();
+        }
+
         public IEnumerable<UtilizatorModel> GetUsers()
         {
             var retValue = new List<UtilizatorModel>();
             var entities = UtilizatorHelper.GetAll();
 
             foreach (var utilizator in entities)
-            {
-                // din entitate in model
+            {                
                 retValue.Add(utilizator.ToModel());
-                //retValue.Add(new UtilizatorModel
-                //{
-                //    ID = utilizator.ID,
-                //    Username = utilizator.Username,                    
-                //    IDFunctie = utilizator.IDFunctie,
-                //    Email = utilizator.Email,
-                //    Prenume = utilizator.Prenume,
-                //    Nume = utilizator.Nume,
-                //    IDElev = utilizator.IDElev
-                //});
+               
             }
             return retValue;
         }
@@ -39,21 +46,11 @@ namespace Catalog.BusinessLogic
         }
 
         public void Insert(UtilizatorModel utilizatorModel)
-        {
-            // utilizatorModel.Parola = "ParolaDefault";
+        {            
             var utlizator = utilizatorModel.ToEntity();
             utlizator.Parola = Utilities.GetHash("ParolaDefault");
             UtilizatorHelper.Insert(utlizator);
-            //UtilizatorHelper.Insert(new Utilizator()
-            //{
-            //    Username = utilizatorModel.Username,
-            //    Parola = hash,
-            //    IDFunctie = utilizatorModel.IDFunctie,
-            //    Email = utilizatorModel.Email,
-            //    Prenume = utilizatorModel.Prenume,
-            //    Nume = utilizatorModel.Nume,
-            //    IDElev = utilizatorModel.IDElev
-            //});
+            
         }
 
         public void Delete(int id)
@@ -72,9 +69,22 @@ namespace Catalog.BusinessLogic
 
 
 
-        public static List<SelectListItem> GetFunctions()
+        public static List<SelectListItem> GetFunctions(string role)
         {
             var functii = FunctieHelper.GetAll();
+            switch (role) {
+                case "Admin": // admin
+                    break;
+                case "Profesor": // profesor
+                    functii = functii.Where(x => x.ID == 3 || x.ID == 4);
+                    break;
+                case "Elev":
+                    functii = functii.Where(x => x.ID == 3 || x.ID == 4);
+                    break;
+                default:
+                    functii = new List<Functie>();
+                    break;
+            }
             return functii.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.Descriere }).ToList();
         }
     }

@@ -26,7 +26,7 @@
             @Html.LabelFor(model => model.IDFunctie, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
-                @Html.DropDownListFor(model => model.IDFunctie, Catalog.BusinessLogic.UtilizatorBusiness.GetFunctions(), "- Not Selected -")
+                @Html.DropDownListFor(model => model.IDFunctie, Catalog.BusinessLogic.UtilizatorBusiness.GetFunctions("Profesor"), "- Not Selected -")
 
                 @Html.ValidationMessageFor(model => model.IDFunctie, "", new { @class = "text-danger" })
             </div>

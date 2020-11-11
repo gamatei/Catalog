@@ -46,6 +46,7 @@
     <Compile Include="ClasaModel.cs" />
     <Compile Include="ElevModel.cs" />
     <Compile Include="FunctieModel.cs" />
+    <Compile Include="LoginModel.cs" />
     <Compile Include="MaterieClasaModel.cs" />
     <Compile Include="MaterieModel.cs" />
     <Compile Include="NotaModel.cs" />

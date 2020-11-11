@@ -26,6 +26,16 @@ namespace Catalog.DAL
             return retValue;
         }
 
+        public static Utilizator GetByUsername(string username)
+        {
+            Utilizator retValue;
+            using (var context = new CatalogProjectEntities())
+            {
+                retValue = context.Utilizators.FirstOrDefault(x => x.Username == username);
+            }
+            return retValue;
+        }
+
         public static Utilizator Insert(Utilizator entity)
         {
             using (var context = new CatalogProjectEntities())
