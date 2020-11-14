@@ -73,9 +73,10 @@ namespace Catalog.BusinessLogic
         {
             var functii = FunctieHelper.GetAll();
             switch (role) {
-                case "Admin": // admin
+                case "Admin":
+                    functii = functii.Where(x =>x.ID==1||x.ID==2|| x.ID == 3 || x.ID == 4);
                     break;
-                case "Profesor": // profesor
+                case "Profesor": 
                     functii = functii.Where(x => x.ID == 3 || x.ID == 4);
                     break;
                 case "Elev":

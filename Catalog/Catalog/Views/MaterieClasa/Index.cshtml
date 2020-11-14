@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Catalog.Model.MaterieClasaModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Adaugare Materie pentru Clasa", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDClasa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDMaterie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OreSaptamanal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDProfesor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDClasa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDMaterie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OreSaptamanal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDProfesor)
+        </td>
+        <td>
+            @Html.ActionLink("Editare", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Detalii", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Stergere", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

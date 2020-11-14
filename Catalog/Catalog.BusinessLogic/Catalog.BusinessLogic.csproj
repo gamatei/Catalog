@@ -78,6 +78,7 @@
     <Compile Include="FunctieBusiness.cs" />
     <Compile Include="Mappers\ClasaMapper.cs" />
     <Compile Include="Mappers\ElevMapper.cs" />
+    <Compile Include="Mappers\MaterieClasaMapper.cs" />
     <Compile Include="Mappers\MaterieMapper.cs" />
     <Compile Include="Mappers\ProfesorMapper.cs" />
     <Compile Include="Mappers\UtilizatorMapper.cs" />

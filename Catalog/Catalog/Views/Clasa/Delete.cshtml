@@ -18,8 +18,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input name="confirmButton" type="submit" value="Stergere" />  
-            <input name="confirmButton" type="button" value="Anulare" /> 
+            <input type="submit" value="Stergere" class="btn btn-default" />
             @Html.ActionLink("Inapoi la Lista", "Index")
         </div>
     }

@@ -1,30 +1,45 @@
 ﻿using Catalog.DAL;
-using Catalog.Entities;
 using Catalog.Model;
 using System.Collections.Generic;
+using Catalog.BusinessLogic.Mappers;
 
 namespace Catalog.BusinessLogic
 {
     public class MaterieClasaBusiness
     {
-        public IEnumerable<MaterieClasaModel> GetUsers()
+        public IEnumerable<MaterieClasaModel> GetMaterieClase()
         {
             var retValue = new List<MaterieClasaModel>();
             var entities = MaterieClasaHelper.GetAll();
 
             foreach (var materieClasa in entities)
             {
-                retValue.Add(new MaterieClasaModel
-                {
-                    ID = materieClasa.ID,
-                    IDClasa = materieClasa.IDClasa,
-                    IDMaterie = materieClasa.IDMaterie,
-                    OreSaptamanal = (int)materieClasa.OreSaptamanal,
-                    IDProfesor = (int)materieClasa.IDProfesor
-                });
-            }
+                retValue.Add(materieClasa.ToModel());
 
+            }
             return retValue;
+        }
+
+        public MaterieClasaModel Get(int id)
+        {
+            return MaterieClasaHelper.Get(id).ToModel();
+        }
+
+        public void Insert(MaterieClasaModel materieClasaModel)
+        {
+            var materieClasa = materieClasaModel.ToEntity();
+            MaterieClasaHelper.Insert(materieClasa);
+
+        }
+
+        public void Delete(int id)
+        {
+            MaterieClasaHelper.Delete(id);
+        }
+
+        public void Update(MaterieClasaModel materieClasaModel)
+        {
+            MaterieClasaHelper.Update(materieClasaModel.ToEntity());
         }
     }
 }

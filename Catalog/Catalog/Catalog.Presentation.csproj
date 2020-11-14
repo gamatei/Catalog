@@ -132,6 +132,7 @@
     <Compile Include="Controllers\ClasaController.cs" />
     <Compile Include="Controllers\ElevController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaterieClasaController.cs" />
     <Compile Include="Controllers\MaterieController.cs" />
     <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Controllers\UtilizatorController.cs" />
@@ -171,6 +172,10 @@
     <Content Include="Views\Elev\Create.cshtml" />
     <Content Include="Views\Elev\Edit.cshtml" />
     <Content Include="Views\Elev\Delete.cshtml" />
+    <Content Include="Views\MaterieClasa\Index.cshtml" />
+    <Content Include="Views\MaterieClasa\Edit.cshtml" />
+    <Content Include="Views\MaterieClasa\Create.cshtml" />
+    <Content Include="Views\MaterieClasa\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

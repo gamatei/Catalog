@@ -1,9 +1,6 @@
 ﻿using Catalog.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Catalog.DAL
 {
@@ -14,7 +11,7 @@ namespace Catalog.DAL
             IEnumerable<MaterieClasa> retValue;
             using (var context = new CatalogProjectEntities())
             {
-                retValue = context.MaterieClasas;
+                retValue = context.MaterieClasas.ToList();
             }
             return retValue;
         }

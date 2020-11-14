@@ -10,8 +10,8 @@ namespace Catalog.Model
         [Required]
         public int IDMaterie { get; set; }
         [Required]
-        public int OreSaptamanal { get; set; }
+        public int? OreSaptamanal { get; set; }
         [Required]
-        public int IDProfesor { get; set; }
+        public int? IDProfesor { get; set; }
     }
 }
