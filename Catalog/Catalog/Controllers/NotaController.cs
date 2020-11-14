@@ -1,24 +1,19 @@
 ﻿using Catalog.BusinessLogic;
 using Catalog.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Catalog.Controllers
 {
-    public class MaterieController : Controller
+    public class NotaController : Controller
     {
         [HttpGet]
         public ActionResult Index()
         {
-            var listaMaterii = new MaterieBusiness().GetMaterii();
+            var listaNote = new NotaBusiness().GetNotes();
             var loggedUser = User.Identity.Name;
 
-            return View(listaMaterii);
+            return View(listaNote);
         }
-
 
         [HttpGet]
         public ActionResult Create()
@@ -26,43 +21,39 @@ namespace Catalog.Controllers
             return View();
         }
 
-        
         [HttpPost]
-        public ActionResult Create(MaterieModel materieModel)
+        public ActionResult Create(NotaModel notaModel)
         {
             if (ModelState.IsValid)
             {
-                new MaterieBusiness().Insert(materieModel);
+                new NotaBusiness().Insert(notaModel);
                 return RedirectToAction("Index");
             }
             return View();
         }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            new NotaBusiness().Delete(id);
 
-        
+            return View("Index");
+        }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = new NotaBusiness().Get(id);
+            return View(model);
         }
 
-        
         [HttpPost]
-        public ActionResult Edit(int id, MaterieModel materie)
+        public ActionResult Edit(int id, NotaModel nota)
         {
             if (ModelState.IsValid)
             {
-                new MaterieBusiness().Update(materie);
+                new NotaBusiness().Update(nota);
             }
             return View();
         }
-                
-        [HttpDelete]
-        public ActionResult Delete(int id)
-        {
-            new MaterieBusiness().Delete(id);
-
-            return View();
-        }
-                
     }
 }

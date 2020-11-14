@@ -1,28 +1,28 @@
-﻿@model IEnumerable<Catalog.Model.MaterieClasaModel>
+﻿@model IEnumerable<Catalog.Model.NotaModel>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista Materii pentru Clase</h2>
+<h2>Lista Note</h2>
 
 <p>
-    @Html.ActionLink("Adaugare Materie pentru Clasa", "Create")
+    @Html.ActionLink("Adaugare Nota", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IDClasa)
+            @Html.DisplayNameFor(model => model.IDElev)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IDMaterie)
+            @Html.DisplayNameFor(model => model.IDMaterieClasa)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OreSaptamanal)
+            @Html.DisplayNameFor(model => model.Nota)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IDProfesor)
+            @Html.DisplayNameFor(model => model.DataNota)
         </th>
         <th></th>
     </tr>
@@ -30,16 +30,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.IDClasa)
+            @Html.DisplayFor(modelItem => item.IDElev)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IDMaterie)
+            @Html.DisplayFor(modelItem => item.IDMaterieClasa)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OreSaptamanal)
+            @Html.DisplayFor(modelItem => item.Nota)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IDProfesor)
+            @Html.DisplayFor(modelItem => item.DataNota)
         </td>
         <td>
             @Html.ActionLink("Editare", "Edit", new { id=item.ID }) |

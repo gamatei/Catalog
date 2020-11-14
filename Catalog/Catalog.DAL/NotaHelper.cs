@@ -11,7 +11,7 @@ namespace Catalog.DAL
             IEnumerable<Nota> retValue;
             using (var context = new CatalogProjectEntities())
             {
-                retValue = context.Notas;
+                retValue = context.Notas.ToList();
             }
             return retValue;
         }

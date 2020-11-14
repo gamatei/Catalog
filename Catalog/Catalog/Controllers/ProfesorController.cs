@@ -20,13 +20,12 @@ namespace Catalog.Controllers
             return View(listaProfesori);
         }
 
-        [Authorize(Roles = "Admin")]
-        // Profesor/Create
+        [Authorize(Roles = "Admin")]        
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Role = "Profesor";
-            ViewBag.Functii = ProfesorBusiness.GetFunctions("Profesor");
+            ViewBag.Role = "Admin";
+            ViewBag.Functii = ProfesorBusiness.GetFunctions("Admin");
             return View();
         }
 

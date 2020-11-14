@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Catalog.Model.AbsentaModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista Absente</h2>
+
+<p>
+    @Html.ActionLink("Adaugare Absenta", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDElev)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDMaterieClasa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataAbsenta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDElev)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDMaterieClasa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataAbsenta)
+        </td>
+        <td>
+            @Html.ActionLink("Editare", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Detalii", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Stergere", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

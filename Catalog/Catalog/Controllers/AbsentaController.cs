@@ -4,33 +4,29 @@ using System.Web.Mvc;
 
 namespace Catalog.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    
-    public class UtilizatorController : Controller
+    public class AbsentaController : Controller
     {
         [HttpGet]
         public ActionResult Index()
         {
-            var listaUtilizatori = new UtilizatorBusiness().GetUsers();
+            var listaAbsente = new AbsentaBusiness().GetAbsente();
             var loggedUser = User.Identity.Name;
 
-            return View(listaUtilizatori);
+            return View(listaAbsente);
         }
 
         [HttpGet]
         public ActionResult Create()
-        {
-            ViewBag.Role = "Admin";
-            ViewBag.Functii = UtilizatorBusiness.GetFunctions("Admin");
+        {            
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(UtilizatorModel utilizatorModel)
+        public ActionResult Create(AbsentaModel absentaModel)
         {
             if (ModelState.IsValid)
             {
-                new UtilizatorBusiness().Insert(utilizatorModel);
+                new AbsentaBusiness().Insert(absentaModel);
                 return RedirectToAction("Index");
             }
             return View();
@@ -38,24 +34,24 @@ namespace Catalog.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            new UtilizatorBusiness().Delete(id);
+            new AbsentaBusiness().Delete(id);
 
-            return View("index");
+            return View("Index");
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var model = new UtilizatorBusiness().Get(id);
+            var model = new AbsentaBusiness().Get(id);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, UtilizatorModel utilizator)
+        public ActionResult Edit(int id, AbsentaModel absenta)
         {
             if (ModelState.IsValid)
             {
-                new UtilizatorBusiness().Update(utilizator);
+                new AbsentaBusiness().Update(absenta);
             }
             return View();
         }

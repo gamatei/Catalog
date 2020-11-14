@@ -11,7 +11,7 @@ namespace Catalog.DAL
             IEnumerable<Absenta> retValue;
             using (var context = new CatalogProjectEntities())
             {
-                retValue = context.Absentas;
+                retValue = context.Absentas.ToList();
             }
             return retValue;
         }

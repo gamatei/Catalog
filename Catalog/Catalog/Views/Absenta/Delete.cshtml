@@ -1,13 +1,13 @@
-﻿@model Catalog.BusinessLogic.MaterieClasaBusiness
+﻿@model Catalog.BusinessLogic.AbsentaBusiness
 
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Stergere Materie pentru Clasa</h2>
+<h2>Stergere Absenta</h2>
 
-<h3>Sunteti sigur ca vreti sa stergeti aceasta Materie pentru Clasa?</h3>
+<h3>Sunteti sigur ca vreti sa stergeti aceasta absenta?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -17,7 +17,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Stergere" class="btn btn-default" />
+            <input type="submit" value="Stergere" class="btn btn-default" /> |
             @Html.ActionLink("Inapoi la Lista", "Index")
         </div>
     }
