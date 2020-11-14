@@ -1,0 +1,25 @@
+﻿@model Catalog.BusinessLogic.ElevBusiness
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sterger Elev</h2>
+
+<h3>Sunteti sigur ca vreti sa stergeti acest elev?</h3>
+<div>
+    <h4>ElevBusiness</h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Stergere" class="btn btn-default" /> |
+            @Html.ActionLink("Inapoi la Lista", "Index")
+        </div>
+    }
+</div>

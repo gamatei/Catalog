@@ -165,6 +165,12 @@
     <Content Include="Views\Profesor\Delete.cshtml" />
     <Content Include="Views\Elev\Index.cshtml" />
     <Content Include="Views\Clasa\Index.cshtml" />
+    <Content Include="Views\Clasa\Create.cshtml" />
+    <Content Include="Views\Clasa\Edit.cshtml" />
+    <Content Include="Views\Clasa\Delete.cshtml" />
+    <Content Include="Views\Elev\Create.cshtml" />
+    <Content Include="Views\Elev\Edit.cshtml" />
+    <Content Include="Views\Elev\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

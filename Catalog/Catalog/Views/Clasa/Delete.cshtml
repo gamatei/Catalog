@@ -1,0 +1,26 @@
+﻿@model Catalog.BusinessLogic.ClasaBusiness
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Stergere Materie</h2>
+
+<h3>Sunteti sigur ca vreti sa stergeti aceasta clasa?</h3>
+<div>
+    <h4>ClasaBusiness</h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input name="confirmButton" type="submit" value="Stergere" />  
+            <input name="confirmButton" type="button" value="Anulare" /> 
+            @Html.ActionLink("Inapoi la Lista", "Index")
+        </div>
+    }
+</div>

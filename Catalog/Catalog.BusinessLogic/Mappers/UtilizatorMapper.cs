@@ -1,8 +1,6 @@
-﻿using Catalog.BusinessLogic.Tools;
-using Catalog.DAL;
+﻿using Catalog.DAL;
 using Catalog.Entities;
 using Catalog.Model;
-using System.Runtime.InteropServices;
 
 namespace Catalog.BusinessLogic.Mappers
 {
