@@ -123,15 +123,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Materie\Index.cshtml" />
     <Content Include="Views\Materie\Create.cshtml" />
-    <Content Include="Views\Materie\View.cshtml" />
     <Content Include="Views\Utilizator\Index.cshtml" />
     <Content Include="Views\Utilizator\Create.cshtml" />
     <Content Include="Views\Utilizator\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClasaController.cs" />
+    <Compile Include="Controllers\ElevController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaterieController.cs" />
+    <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Controllers\UtilizatorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -154,6 +156,15 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Utilizator\Delete.cshtml" />
+    <Content Include="Views\Materie\Edit.cshtml" />
+    <Content Include="Views\Materie\Delete.cshtml" />
+    <Content Include="Views\Profesor\Index.cshtml" />
+    <Content Include="Views\Profesor\Create.cshtml" />
+    <Content Include="Views\Profesor\Edit.cshtml" />
+    <Content Include="Views\Profesor\Delete.cshtml" />
+    <Content Include="Views\Elev\Index.cshtml" />
+    <Content Include="Views\Clasa\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

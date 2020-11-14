@@ -11,7 +11,7 @@ namespace Catalog.DAL
             IEnumerable<Materie> retValue;
             using (var context = new CatalogProjectEntities())
             {
-                retValue = context.Materies;
+                retValue = context.Materies.ToList();
             }
             return retValue;
         }

@@ -11,7 +11,7 @@ namespace Catalog.DAL
             IEnumerable<Profesor> retValue;
             using (var context = new CatalogProjectEntities())
             {
-                retValue = context.Profesors;
+                retValue = context.Profesors.ToList();
             }
             return retValue;
         }

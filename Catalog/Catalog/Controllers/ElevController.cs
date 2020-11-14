@@ -8,62 +8,57 @@ using System.Web.Mvc;
 
 namespace Catalog.Controllers
 {
-    public class MaterieController : Controller
+    [Authorize(Roles = "Admin,Profesor")]
+    public class ElevController : Controller
     {
         [HttpGet]
         public ActionResult Index()
         {
-            var listaMaterii = new MaterieBusiness().GetMaterii();
+            var listaUtilizatori = new ElevBusiness().GetElevi();
             var loggedUser = User.Identity.Name;
 
-            return View(listaMaterii);
+            return View(listaUtilizatori);
         }
-
-
+                
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
-        
         [HttpPost]
-        public ActionResult Create(MaterieModel materieModel)
+        public ActionResult Create(ElevModel elevModel)
         {
             if (ModelState.IsValid)
             {
-                new MaterieBusiness().Insert(materieModel);
+                new ElevBusiness().Insert(elevModel);
                 return RedirectToAction("Index");
             }
             return View();
         }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            new ElevBusiness().Delete(id);
 
-        
+            return View("index");
+        }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = new ElevBusiness().Get(id);
+            return View(model);
         }
 
-        
         [HttpPost]
-        public ActionResult Edit(int id, MaterieModel materie)
+        public ActionResult Edit(int id, ElevModel elev)
         {
             if (ModelState.IsValid)
             {
-                new MaterieBusiness().Update(materie);
+                new ElevBusiness().Update(elev);
             }
             return View();
         }
-
-        
-        [HttpDelete]
-        public ActionResult Delete(int id)
-        {
-            new MaterieBusiness().Delete(id);
-
-            return View();
-        }
-                
     }
 }

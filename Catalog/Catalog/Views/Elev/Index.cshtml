@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Catalog.Model.ElevModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDUtilizator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilizator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDClasa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDUtilizator)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utilizator)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDClasa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Editare", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Detalii", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Stergere", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

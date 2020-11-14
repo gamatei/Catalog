@@ -1,4 +1,5 @@
-﻿using Catalog.DAL;
+﻿using Catalog.BusinessLogic.Mappers;
+using Catalog.DAL;
 using Catalog.Entities;
 using Catalog.Model;
 using System.Collections.Generic;
@@ -14,14 +15,27 @@ namespace Catalog.BusinessLogic
 
             foreach (var materie in entities)
             {
-                retValue.Add(new MaterieModel
-                {
-                    ID = materie.ID,
-                    Nume=materie.Nume
-                });
+                retValue.Add(materie.ToModel());
             }
 
             return retValue;
+        }
+
+        public void Insert(MaterieModel materieModel)
+        {
+            var materie = materieModel.ToEntity();            
+            MaterieHelper.Insert(materie);
+
+        }
+
+        public void Delete(int id)
+        {
+            MaterieHelper.Delete(id);
+        }
+
+        public void Update(MaterieModel materieModel)
+        {
+            MaterieHelper.Update(materieModel.ToEntity());
         }
 
     }

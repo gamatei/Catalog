@@ -8,62 +8,57 @@ using System.Web.Mvc;
 
 namespace Catalog.Controllers
 {
-    public class MaterieController : Controller
+    [Authorize(Roles = "Admin,Profesor")]
+    public class ClasaController : Controller
     {
         [HttpGet]
         public ActionResult Index()
         {
-            var listaMaterii = new MaterieBusiness().GetMaterii();
+            var listaClase = new ClasaBusiness().GetClase();
             var loggedUser = User.Identity.Name;
 
-            return View(listaMaterii);
+            return View(listaClase);
         }
-
 
         [HttpGet]
         public ActionResult Create()
-        {
+        {            
             return View();
         }
 
-        
         [HttpPost]
-        public ActionResult Create(MaterieModel materieModel)
+        public ActionResult Create(ClasaModel clasaModel)
         {
             if (ModelState.IsValid)
             {
-                new MaterieBusiness().Insert(materieModel);
+                new ClasaBusiness().Insert(clasaModel);
                 return RedirectToAction("Index");
             }
             return View();
         }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            new ClasaBusiness().Delete(id);
 
-        
+            return View("index");
+        }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = new ClasaBusiness().Get(id);
+            return View(model);
         }
 
-        
         [HttpPost]
-        public ActionResult Edit(int id, MaterieModel materie)
+        public ActionResult Edit(int id, ClasaModel clasa)
         {
             if (ModelState.IsValid)
             {
-                new MaterieBusiness().Update(materie);
+                new ClasaBusiness().Update(clasa);
             }
             return View();
         }
-
-        
-        [HttpDelete]
-        public ActionResult Delete(int id)
-        {
-            new MaterieBusiness().Delete(id);
-
-            return View();
-        }
-                
     }
 }

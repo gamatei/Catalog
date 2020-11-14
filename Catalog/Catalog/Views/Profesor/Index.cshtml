@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Catalog.Model.ProfesorModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista Profesori</h2>
+
+<p>
+    @Html.ActionLink("Adaugare Profesor", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDUtilizator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Detalii)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDMaterie)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDUtilizator)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Detalii)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDMaterie)
+        </td>
+        <td>
+            @Html.ActionLink("Editare", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Detalii", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Stergere", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

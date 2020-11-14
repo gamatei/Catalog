@@ -1,0 +1,26 @@
+﻿@model Catalog.BusinessLogic.UtilizatorBusiness
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Stergere Utilizator</h2>
+
+<h3>Sunteti sigur ca doriti eliminarea utilizatorului?</h3>
+<div>
+    <h4>UtilizatorBusiness</h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type = "submit" value="Stergere" class="btn btn-default" />
+            <input type = "submit" value="Anulare" class="btn btn-default" />
+             @Html.ActionLink("Inapoi la lista", "Index")
+        </div>
+    }
+</div>

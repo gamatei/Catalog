@@ -1,12 +1,10 @@
 ﻿using Catalog.BusinessLogic;
 using Catalog.Model;
 using System.Web.Mvc;
-using System.Security.Principal;
-using System.Web.Security;
 
 namespace Catalog.Controllers
 {
-    [Authorize(Roles = "Admin,Profesor,Elev")]
+    [Authorize(Roles = "Admin")]
     public class UtilizatorController : Controller
     {
         [HttpGet]
@@ -14,8 +12,6 @@ namespace Catalog.Controllers
         {
             var listaUtilizatori = new UtilizatorBusiness().GetUsers();
             var loggedUser = User.Identity.Name;
-            // daca userul logat e admin vede tot, daca e profesor vede doar elevii si parintii
-            // .Where(x = > x.FunctieId = 3 || 4)
 
             return View(listaUtilizatori);
         }
@@ -25,7 +21,7 @@ namespace Catalog.Controllers
         public ActionResult Create()
         {
             ViewBag.Role = "Admin";
-            ViewBag.Functii = UtilizatorBusiness.GetFunctions("Profesor");
+            ViewBag.Functii = UtilizatorBusiness.GetFunctions("Admin");
             return View();
         }
 
@@ -39,13 +35,19 @@ namespace Catalog.Controllers
             }
             return View();
         }
-        [HttpDelete]
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             new UtilizatorBusiness().Delete(id);
 
-            return View();
+            return View("index");
         }
+
+        //[HttpGet]
+        //public ActionResult Delete()
+        //{
+        //    return View();
+        //}
 
         [HttpGet]
         public ActionResult Edit(int id)

@@ -6,19 +6,19 @@ namespace Catalog.Model
     public class UtilizatorModel
     {
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Camp obligatoriu")]
         public string Username { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Camp obligatoriu")]
         public int IDFunctie { get; set; }
         public string Functie { get; set; }
 
-        [Display(Name = "Email address")]
-        [Required(ErrorMessage = "The email address is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [Display(Name = "Adresa de email")]
+        [Required(ErrorMessage = "Camp obligatoriu")]
+        [EmailAddress(ErrorMessage = "Adresa de email invalida")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Camp obligatoriu")]
         public string Prenume { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Camp obligatoriu")]
         public string Nume { get; set; }
         [Display(Name = "Userul este parintele lui:")]
         public int? IDElev { get; set; }

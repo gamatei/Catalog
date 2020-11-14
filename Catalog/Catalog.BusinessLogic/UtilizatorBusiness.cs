@@ -12,7 +12,7 @@ namespace Catalog.BusinessLogic
     public class UtilizatorBusiness
     {
         public UtilizatorModel ValidateUser(string username, string parola) {
-            // user pe baza de parola
+            
             var user = UtilizatorHelper.GetByUsername(username);
 
             if (user == null) {
@@ -47,9 +47,9 @@ namespace Catalog.BusinessLogic
 
         public void Insert(UtilizatorModel utilizatorModel)
         {            
-            var utlizator = utilizatorModel.ToEntity();
-            utlizator.Parola = Utilities.GetHash("ParolaDefault");
-            UtilizatorHelper.Insert(utlizator);
+            var utilizator = utilizatorModel.ToEntity();
+            utilizator.Parola = Utilities.GetHash("ParolaDefault");
+            UtilizatorHelper.Insert(utilizator);
             
         }
 
